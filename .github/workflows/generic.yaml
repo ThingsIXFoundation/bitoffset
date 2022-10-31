@@ -33,7 +33,10 @@ jobs:
         uses: actions/checkout@v3
       - name: Check license headers
         run: |
-          addlicense -check -c "Stichting ThingsIX Foundation" -s . | xargs -I %s -- echo "::error file=%s,line=1::Missing license header"
+          errors=$(addlicense -check -c "Stichting ThingsIX Foundation" -s .)
+          ret=$?
+          echo $errors | xargs -I %s -- echo "::error file=%s,line=1::Missing license header"
+          exit $ret
   check-commit-message-style:
     name: Check commit message
     runs-on: ubuntu-latest
