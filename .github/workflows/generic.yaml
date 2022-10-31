@@ -18,9 +18,6 @@ name: 'Generic Checks'
 
 on:
   pull_request:
-    branches:
-      - main
-
 jobs:
   license:
     name: Check if all files contain license header
