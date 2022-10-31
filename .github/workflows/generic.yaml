@@ -35,7 +35,7 @@ jobs:
         run: |
           errors=$(addlicense -check -c "Stichting ThingsIX Foundation" -s .)
           ret=$?
-          echo $errors | xargs -I %s -- echo "::error file=%s,line=1::Missing license header"
+          echo $errors | xargs -I %s -- echo "Missing license header in %s"
           exit $ret
   check-commit-message-style:
     name: Check commit message
