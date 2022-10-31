@@ -32,7 +32,8 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v3
       - name: Check license headers
-        run: ./check-license.sh
+        run: |
+          addlicense -check -c "Stichting ThingsIX Foundation" -s . | xargs -I %s -- echo "::error file=%s,line=1::Missing license header"
   check-commit-message-style:
     name: Check commit message
     runs-on: ubuntu-latest
