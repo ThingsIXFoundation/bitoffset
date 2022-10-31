@@ -18,6 +18,9 @@ name: 'Generic Checks'
 
 on:
   pull_request:
+    branches:
+      - main
+
 jobs:
   license:
     name: Check if all files contain license header
@@ -32,11 +35,7 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v3
       - name: Check license headers
-        run: |
-          errors=$(addlicense -check -c "Stichting ThingsIX Foundation" -s .)
-          ret=$?
-          echo $errors | xargs -I %s -- echo "Missing license header in %s"
-          exit $ret
+        run: ./check-license.sh
   check-commit-message-style:
     name: Check commit message
     runs-on: ubuntu-latest
